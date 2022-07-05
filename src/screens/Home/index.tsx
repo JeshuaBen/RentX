@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Container, Title } from "./style";
+import { Container, Header } from "./style";
 
 export function Home() {
   return (
     <Container>
-      <Title>Home</Title>
+      <Header></Header>
     </Container>
   );
 }

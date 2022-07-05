@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { StatusBar } from "expo-status-bar";
-import AppLoading from "expo-app-loading";
+import * as SplashScreen from "expo-splash-screen";
 import { ThemeProvider } from "styled-components";
 
 import { Home } from "./src/screens/Home";
@@ -23,8 +23,14 @@ export default function App() {
     Inter_500Medium,
   });
 
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   }
 
   return (
