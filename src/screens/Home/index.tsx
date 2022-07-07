@@ -3,7 +3,7 @@ import { Header } from "../../components/Header";
 
 import { StatusBar } from "react-native";
 
-import { Container } from "./style";
+import { Container, CarList } from "./style";
 import { Car } from "../../components/Car";
 
 export function Home() {
@@ -25,7 +25,11 @@ export function Home() {
         translucent
       />
       <Header />
-      <Car data={carData} />
+      <CarList
+        data={[1, 2, 3, 4, 5, 6]}
+        keyExtractor={(item) => String(item)}
+        renderItem={({ item }) => <Car data={carData} />}
+      />
     </Container>
   );
 }
