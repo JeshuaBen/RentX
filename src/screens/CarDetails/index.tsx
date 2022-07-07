@@ -7,7 +7,7 @@ export const CarDetails = () => {
   return (
     <Container>
       <Header>
-        <BackButton color="#000" />
+        <BackButton />
       </Header>
     </Container>
   );
