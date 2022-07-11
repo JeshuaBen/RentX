@@ -25,7 +25,9 @@ import {
   Period,
   Price,
   About,
+  Footer,
 } from "./style";
+import { Button } from "../../components/Button";
 
 export const CarDetails = () => {
   return (
@@ -69,6 +71,9 @@ export const CarDetails = () => {
           para quem gosta de acelerar.
         </About>
       </Content>
+      <Footer>
+        <Button title="Confirmar" />
+      </Footer>
     </Container>
   );
 };
