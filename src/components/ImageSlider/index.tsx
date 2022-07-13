@@ -12,7 +12,7 @@ interface Props {
   imagesUrl: string[];
 }
 
-export const ImageSlider = ({ imagesUrl }: Props) => {
+export const ImageSlider: React.FC<Props> = ({ imagesUrl }) => {
   return (
     <Container>
       <ImageIndexes>

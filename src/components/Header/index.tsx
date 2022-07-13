@@ -5,7 +5,7 @@ import Logo from "../../assets/logo.svg";
 
 import { Container, HeaderContent, TotalCars } from "./style";
 
-export const Header = () => {
+export const Header: React.FC = () => {
   return (
     <Container>
       <HeaderContent>

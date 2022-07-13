@@ -6,7 +6,7 @@ import { StatusBar } from "react-native";
 import { Container, CarList } from "./style";
 import { Car } from "../../components/Car";
 
-export function Home() {
+export const Home: React.FC = () => {
   const carData = {
     brand: "Audi",
     name: "RS 5 Coupé",
@@ -32,4 +32,4 @@ export function Home() {
       />
     </Container>
   );
-}
+};

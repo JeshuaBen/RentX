@@ -17,7 +17,7 @@ import {
 import ArrowSvg from "../../assets/arrow.svg";
 import { Button } from "../../components/Button";
 
-export const Scheduling = () => {
+export const Scheduling: React.FC = () => {
   const theme = useTheme();
   return (
     <Container>

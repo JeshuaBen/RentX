@@ -29,7 +29,7 @@ interface Props {
   data: CarData;
 }
 
-export const Car = ({ data }: Props) => {
+export const Car: React.FC<Props> = ({ data }) => {
   return (
     <Container>
       <Details>

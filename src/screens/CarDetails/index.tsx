@@ -29,7 +29,7 @@ import {
 } from "./style";
 import { Button } from "../../components/Button";
 
-export const CarDetails = () => {
+export const CarDetails: React.FC = () => {
   return (
     <Container>
       <Header>
