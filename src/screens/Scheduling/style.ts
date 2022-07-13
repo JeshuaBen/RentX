@@ -71,7 +71,6 @@ export const Content = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
 })`
   flex: 1;
-  padding: 24px;
 `;
 export const Footer = styled.View`
   padding: 24px;
