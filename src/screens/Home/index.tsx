@@ -1,12 +1,19 @@
 import React from "react";
-import { Header } from "../../components/Header";
+import {
+  ParamListBase,
+  NavigationProp,
+  useNavigation,
+} from "@react-navigation/native";
 
 import { StatusBar } from "react-native";
 
 import { Container, CarList } from "./style";
+import { Header } from "../../components/Header";
 import { Car } from "../../components/Car";
 
 export const Home: React.FC = () => {
+  const navigation = useNavigation<any>();
+
   const carData = {
     brand: "Audi",
     name: "RS 5 Coupé",
@@ -15,6 +22,10 @@ export const Home: React.FC = () => {
       price: 120,
     },
     thumbnail: "https://freepngimg.com/thumb/audi/35227-5-audi-rs5-red.png",
+  };
+
+  const handleCarDetails = () => {
+    navigation.navigate("CarDetails");
   };
 
   return (
@@ -28,7 +39,9 @@ export const Home: React.FC = () => {
       <CarList
         data={[1, 2, 3, 4, 5, 6]}
         keyExtractor={(item) => String(item)}
-        renderItem={({ item }) => <Car data={carData} />}
+        renderItem={({ item }) => (
+          <Car data={carData} onPress={handleCarDetails} />
+        )}
       />
     </Container>
   );

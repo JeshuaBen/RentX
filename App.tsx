@@ -14,6 +14,7 @@ import {
 import { Inter_400Regular, Inter_500Medium } from "@expo-google-fonts/inter";
 
 import { Routes } from "./src/Routes";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -35,8 +36,10 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <Routes />
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider theme={theme}>
+        <Routes />
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }

@@ -8,9 +8,17 @@ import { Scheduling } from "../screens/Scheduling";
 import { SchedulingComplete } from "../screens/SchedulingComplete";
 import { SchedulingDetails } from "../screens/SchedulingDetails";
 
+export interface AppRoutes {
+  Home: undefined;
+  CarDetails: undefined;
+  Scheduling: undefined;
+  SchedulingDetails: undefined;
+  SchedulingComplete: undefined;
+}
+
 const { Navigator, Screen } = createStackNavigator();
 
-export const StackRoutes: React.FC = () => {
+export const StackRoutes: React.FC<AppRoutes> = () => {
   return (
     <Navigator
       screenOptions={{
