@@ -1,5 +1,5 @@
 import React from "react";
-import { useWindowDimensions } from "react-native";
+import { StatusBar, useWindowDimensions } from "react-native";
 
 import { ConfirmButton } from "../../components/ConfirmButton";
 import BackgroundGraySvg from "../../assets/logo_background_gray.svg";
@@ -18,6 +18,11 @@ export const SchedulingComplete: React.FC = () => {
   const { width } = useWindowDimensions();
   return (
     <Container>
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="transparent"
+      />
       <BackgroundContainer>
         <BackgroundGraySvg width={width} />
       </BackgroundContainer>
