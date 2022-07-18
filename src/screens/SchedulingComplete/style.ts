@@ -1,19 +1,23 @@
-import { RFValue } from "react-native-responsive-fontsize";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
 export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.header};
-
-  padding-top: ${RFValue(50)}px;
 `;
 
-export const BackgroundContainer = styled.View``;
+export const BackgroundContainer = styled.View`
+  height: ${RFPercentage(48)}px;
+
+  padding-top: 60px;
+`;
 
 export const Content = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+
+  padding-bottom: 60px;
 `;
 
 export const Title = styled.Text`
@@ -23,6 +27,7 @@ export const Title = styled.Text`
 
   margin-top: 40px;
 `;
+
 export const Message = styled.Text`
   font-size: ${RFValue(15)}px;
   color: ${({ theme }) => theme.colors.text_detail};
