@@ -5,8 +5,10 @@ export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.header};
 
-  padding-top: 96px;
+  padding-top: ${RFValue(50)}px;
 `;
+
+export const BackgroundContainer = styled.View``;
 
 export const Content = styled.View`
   flex: 1;
@@ -29,4 +31,11 @@ export const Message = styled.Text`
   text-align: center;
 
   margin-top: 16px;
+`;
+
+export const Footer = styled.View`
+  width: 100%;
+  align-items: center;
+
+  margin: 80px 0;
 `;
