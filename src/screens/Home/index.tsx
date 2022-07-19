@@ -1,9 +1,11 @@
 import React from "react";
 import {
-  ParamListBase,
-  NavigationProp,
   useNavigation,
 } from "@react-navigation/native";
+
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from "../../Routes/stack.routes";
+
 
 import { StatusBar } from "react-native";
 
@@ -11,8 +13,10 @@ import { Container, CarList } from "./style";
 import { Header } from "../../components/Header";
 import { Car } from "../../components/Car";
 
+type HomeScreenProps = StackNavigationProp<RootStackParamList>
+
 export const Home: React.FC = () => {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<HomeScreenProps>();
 
   const carData = {
     brand: "Audi",
