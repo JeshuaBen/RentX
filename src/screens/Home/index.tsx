@@ -11,6 +11,7 @@ import { Header } from "../../components/Header";
 import { Car } from "../../components/Car";
 import { api } from "../../services/api";
 import { CarDTO } from "../../dtos/CarDTO";
+import { Load } from "../../Load";
 
 type HomeScreenProps = StackNavigationProp<RootStackParamList>;
 
@@ -57,13 +58,18 @@ export const Home: React.FC = () => {
         translucent
       />
       <Header />
-      <CarList
-        data={cars}
-        keyExtractor={(item) => String(item.id)}
-        renderItem={({ item }) => (
-          <Car data={item} onPress={handleCarDetails} />
-        )}
-      />
+
+      {loading ? (
+        <Load />
+      ) : (
+        <CarList
+          data={cars}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item }) => (
+            <Car data={item} onPress={handleCarDetails} />
+          )}
+        />
+      )}
     </Container>
   );
 };
