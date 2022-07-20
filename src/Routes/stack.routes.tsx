@@ -14,7 +14,7 @@ export type RootStackParamList = {
   Scheduling: undefined;
   SchedulingDetails: undefined;
   SchedulingComplete: undefined;
-}
+};
 
 const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 
@@ -28,8 +28,8 @@ export const StackRoutes: React.FC = () => {
       <Screen name="Home" component={Home} />
       <Screen name="CarDetails" component={CarDetails} />
       <Screen name="Scheduling" component={Scheduling} />
-      <Screen name="SchedulingComplete" component={SchedulingComplete} />
       <Screen name="SchedulingDetails" component={SchedulingDetails} />
+      <Screen name="SchedulingComplete" component={SchedulingComplete} />
     </Navigator>
   );
 };

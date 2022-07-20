@@ -5,12 +5,12 @@ import { Container, Title } from "./style";
 
 interface Props extends RectButtonProps {
   title: string;
-  color?: string;
+  type: "rent" | "confirm";
 }
 
-export const Button: React.FC<Props> = ({ title, color, ...rest }) => {
+export const Button: React.FC<Props> = ({ title, type, ...rest }) => {
   return (
-    <Container {...rest}>
+    <Container {...rest} type={type}>
       <Title>{title}</Title>
     </Container>
   );

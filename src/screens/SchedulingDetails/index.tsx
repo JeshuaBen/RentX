@@ -40,9 +40,19 @@ import {
 } from "./style";
 import { Button } from "../../components/Button";
 import { RFValue } from "react-native-responsive-fontsize";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../Routes/stack.routes";
+
+type SchedulingDetailsScreenProps = StackNavigationProp<RootStackParamList>;
 
 export const SchedulingDetails: React.FC = () => {
+  const navigation = useNavigation<SchedulingDetailsScreenProps>();
   const theme = useTheme();
+
+  const handleConfirmRental = () => {
+    navigation.navigate("SchedulingComplete");
+  };
   return (
     <Container>
       <Header>
@@ -110,7 +120,11 @@ export const SchedulingDetails: React.FC = () => {
         </RentalPrice>
       </Content>
       <Footer>
-        <Button title="Confirmar" />
+        <Button
+          title="Alugar agora"
+          onPress={handleConfirmRental}
+          type="rent"
+        />
       </Footer>
     </Container>
   );

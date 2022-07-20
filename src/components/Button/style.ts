@@ -1,9 +1,9 @@
 import { RectButton, RectButtonProps } from "react-native-gesture-handler";
 import { RFValue } from "react-native-responsive-fontsize";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 interface ButtonProps extends RectButtonProps {
-  color?: string;
+  type: "rent" | "confirm";
 }
 
 export const Container = styled(RectButton)<ButtonProps>`
@@ -13,12 +13,21 @@ export const Container = styled(RectButton)<ButtonProps>`
   align-items: center;
   justify-content: center;
 
-  background-color: ${({ color, theme }) =>
-    color ? color : theme.colors.main};
+  ${({ type, theme }) =>
+    type === "rent" &&
+    css`
+      background-color: ${({ theme }) => theme.colors.success};
+    `};
+
+  ${({ type, theme }) =>
+    type === "confirm" &&
+    css`
+      background-color: ${({ theme }) => theme.colors.main};
+    `}
 `;
 
 export const Title = styled.Text`
   font-family: ${({ theme }) => theme.fonts.primary_500};
   font-size: ${RFValue(15)}px;
-  color: ${({ theme }) => theme.colors.shape};
+  color: ${({ theme }) => theme.colors.background_secondary};
 `;
