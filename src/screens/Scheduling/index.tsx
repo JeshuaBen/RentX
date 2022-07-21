@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -20,15 +20,37 @@ import {
 import ArrowSvg from "../../assets/arrow.svg";
 import { Button } from "../../components/Button";
 import { Calendar } from "../../components/Calendar";
+import { DayProps } from "../../components/Calendar/index";
+import { generateIntervals } from "../../components/Calendar/generateInterval";
 
 type SchedulingScreenProps = StackNavigationProp<RootStackParamList>;
 
 export const Scheduling: React.FC = () => {
+  const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>(
+    {} as DayProps
+  );
   const navigation = useNavigation<SchedulingScreenProps>();
   const theme = useTheme();
 
   const handleConfirmScheduling = () => {
     navigation.navigate("SchedulingDetails");
+  };
+
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
+
+  const handleChangeDate = (date: DayProps) => {
+    let start = !lastSelectedDate.timestamp ? date : lastSelectedDate;
+    let end = date;
+
+    if (start.timestamp > end.timestamp) {
+      start = end;
+      end = start;
+    }
+
+    setLastSelectedDate(end);
+    const interval = generateIntervals(start, end);
   };
 
   return (
@@ -39,7 +61,7 @@ export const Scheduling: React.FC = () => {
         backgroundColor="transparent"
       />
       <Header>
-        <BackButton onPress={() => {}} color={theme.colors.shape} />
+        <BackButton onPress={handleGoBack} color={theme.colors.shape} />
 
         <Title>
           Escolha uma {"\n"}
@@ -62,7 +84,7 @@ export const Scheduling: React.FC = () => {
       </Header>
 
       <Content>
-        <Calendar />
+        <Calendar markedDates={{}} onDayPress={handleChangeDate} />
       </Content>
 
       <Footer>
