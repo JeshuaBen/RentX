@@ -22,6 +22,7 @@ import { Button } from "../../components/Button";
 import { Calendar } from "../../components/Calendar";
 import { DayProps } from "../../components/Calendar/index";
 import { generateIntervals } from "../../components/Calendar/generateInterval";
+import { MarkedDatesType } from "react-native-calendars/src/calendar";
 
 type SchedulingScreenProps = StackNavigationProp<RootStackParamList>;
 
@@ -29,6 +30,10 @@ export const Scheduling: React.FC = () => {
   const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>(
     {} as DayProps
   );
+  const [markedDates, setMarkedDates] = useState<MarkedDatesType>(
+    {} as MarkedDatesType
+  );
+
   const navigation = useNavigation<SchedulingScreenProps>();
   const theme = useTheme();
 
@@ -51,7 +56,11 @@ export const Scheduling: React.FC = () => {
 
     setLastSelectedDate(end);
     const interval = generateIntervals(start, end);
+
+    setMarkedDates(interval);
   };
+
+  console.log(markedDates);
 
   return (
     <Container>
@@ -84,7 +93,7 @@ export const Scheduling: React.FC = () => {
       </Header>
 
       <Content>
-        <Calendar markedDates={{}} onDayPress={handleChangeDate} />
+        <Calendar markedDates={markedDates} onDayPress={handleChangeDate} />
       </Content>
 
       <Footer>
