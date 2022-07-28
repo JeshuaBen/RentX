@@ -65,7 +65,7 @@ export const Calendar: React.FC<CalendarProps> = ({
       firstDay={1}
       // First Day: Refere ao primeiro dia que vc começaria o seu calendário. No nosso caso sendo a segunda.
       minDate={String(new Date())}
-      markingType="period"
+      markingType={"period"}
       markedDates={markedDates}
       onDayPress={onDayPress}
     />
