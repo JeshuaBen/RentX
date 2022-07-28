@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StatusBar } from "react-native";
+import { Alert, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../Routes/stack.routes";
@@ -23,8 +23,17 @@ import { Calendar } from "../../components/Calendar";
 import { DayProps } from "../../components/Calendar/index";
 import { generateIntervals } from "../../components/Calendar/generateInterval";
 import { MarkedDatesType } from "react-native-calendars/src/calendar";
+import { getPlatformDate } from "../../utils/getPlataformDate";
+import { format } from "date-fns";
 
 type SchedulingScreenProps = StackNavigationProp<RootStackParamList>;
+
+interface RentalPeriod {
+  start: number;
+  startFormatted: string;
+  end: number;
+  endFormatted: string;
+}
 
 export const Scheduling: React.FC = () => {
   const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>(
@@ -33,12 +42,19 @@ export const Scheduling: React.FC = () => {
   const [markedDates, setMarkedDates] = useState<MarkedDatesType>(
     {} as MarkedDatesType
   );
+  const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>(
+    {} as RentalPeriod
+  );
 
   const navigation = useNavigation<SchedulingScreenProps>();
   const theme = useTheme();
 
   const handleConfirmScheduling = () => {
-    navigation.navigate("SchedulingDetails");
+    if (!rentalPeriod.start || !rentalPeriod.end) {
+      Alert.alert("Selecione o intervalo para alugar.");
+    } else {
+      navigation.navigate("SchedulingDetails");
+    }
   };
 
   const handleGoBack = () => {
@@ -58,9 +74,20 @@ export const Scheduling: React.FC = () => {
     const interval = generateIntervals(start, end);
 
     setMarkedDates(interval);
-  };
 
-  console.log(markedDates);
+    const firstDate = Object.keys(interval)[0];
+    const endDate = Object.keys(interval)[Object.keys(interval).length - 1];
+
+    setRentalPeriod({
+      start: start.timestamp,
+      end: end.timestamp,
+      startFormatted: format(
+        getPlatformDate(new Date(firstDate)),
+        "dd/MM/yyyy"
+      ),
+      endFormatted: format(getPlatformDate(new Date(endDate)), "dd/MM/yyyy"),
+    });
+  };
 
   return (
     <Container>
@@ -81,13 +108,20 @@ export const Scheduling: React.FC = () => {
         <RentalPeriod>
           <DateInfo>
             <DateTitle>DE</DateTitle>
-            <DateValue selected={false}>18/06/2021</DateValue>
+            <DateValue selected={!!rentalPeriod.startFormatted}>
+              {rentalPeriod.startFormatted}
+            </DateValue>
           </DateInfo>
 
           <ArrowSvg />
           <DateInfo>
             <DateTitle>ATÉ</DateTitle>
-            <DateValue selected={false}>18/06/2021</DateValue>
+            <DateValue selected={!!rentalPeriod.endFormatted}>
+              {rentalPeriod.endFormatted}
+            </DateValue>
+            {/* 
+              É utilizado as duas ' !! ' para verificar se existe conteúdo dentro de algo, caso exista ele retorna true e caso não, retorna false.
+            */}
           </DateInfo>
         </RentalPeriod>
       </Header>
