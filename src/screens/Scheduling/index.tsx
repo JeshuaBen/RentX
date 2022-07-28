@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Alert, StatusBar } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../Routes/stack.routes";
 import { BackButton } from "../../components/BackButton";
@@ -25,14 +25,17 @@ import { generateIntervals } from "../../components/Calendar/generateInterval";
 import { MarkedDatesType } from "react-native-calendars/src/calendar";
 import { getPlatformDate } from "../../utils/getPlataformDate";
 import { format } from "date-fns";
+import { CarDTO } from "../../dtos/CarDTO";
 
 type SchedulingScreenProps = StackNavigationProp<RootStackParamList>;
 
 interface RentalPeriod {
-  start: number;
   startFormatted: string;
-  end: number;
   endFormatted: string;
+}
+
+interface Params {
+  car: CarDTO;
 }
 
 export const Scheduling: React.FC = () => {
@@ -45,15 +48,20 @@ export const Scheduling: React.FC = () => {
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>(
     {} as RentalPeriod
   );
+  const route = useRoute();
+  const { car } = route.params as Params;
 
   const navigation = useNavigation<SchedulingScreenProps>();
   const theme = useTheme();
 
   const handleConfirmScheduling = () => {
-    if (!rentalPeriod.start || !rentalPeriod.end) {
+    if (!rentalPeriod.startFormatted || !rentalPeriod.endFormatted) {
       Alert.alert("Selecione o intervalo para alugar.");
     } else {
-      navigation.navigate("SchedulingDetails");
+      navigation.navigate("SchedulingDetails", {
+        car,
+        dates: Object.keys(markedDates),
+      });
     }
   };
 
@@ -79,8 +87,6 @@ export const Scheduling: React.FC = () => {
     const endDate = Object.keys(interval)[Object.keys(interval).length - 1];
 
     setRentalPeriod({
-      start: start.timestamp,
-      end: end.timestamp,
       startFormatted: format(
         getPlatformDate(new Date(firstDate)),
         "dd/MM/yyyy"

@@ -53,10 +53,15 @@ export const SchedulingDetails: React.FC = () => {
   const handleConfirmRental = () => {
     navigation.navigate("SchedulingComplete");
   };
+
+  const handleGoBackScheduling = () => {
+    navigation.goBack();
+  };
+
   return (
     <Container>
       <Header>
-        <BackButton />
+        <BackButton onPress={handleGoBackScheduling} />
       </Header>
 
       <CarImages>
